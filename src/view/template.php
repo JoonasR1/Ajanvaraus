@@ -13,7 +13,7 @@
     </section>
     <footer>
       <hr>
-      <div>Lääkärin ajanvaraus by Kurpitsa</div>
+      <div>Lääkärin ajanvaraus by Joonas Riiski</div>
     </footer>
   </body>
 </html>

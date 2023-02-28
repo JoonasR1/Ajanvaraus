@@ -10,14 +10,17 @@
   $request = strtok($request, '?');
 
    // Luodaan uusi Plates-olio ja kytketään se sovelluksen sivupohjiin.
-   $templates = new League\Plates\Engine(TEMPLATE_DIR);
+  $templates = new League\Plates\Engine(TEMPLATE_DIR);
 
   
   // Selvitetään mitä sivua on kutsuttu ja suoritetaan sivua vastaava
   // käsittelijä.
   if ($request === '/' || $request === '/ajanvaraus') {
-    echo $templates->render('ajanvaraus');
-  } else if ($request === '/varmistus') {
+    require_once MODEL_DIR . 'ajanvaraus.php';
+    $ajanvaraus = haeAjanvaraus();
+    echo $templates->render('ajanvaraus',['ajanvaraus' => $ajanvaraus]);
+}
+ else if ($request === '/varmistus') {
     echo $templates->render('varmistus');
   } else {
     echo $templates->render('notfound');
