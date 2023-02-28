@@ -10,8 +10,7 @@
   $request = strtok($request, '?');
 
   // Luodaan uusi Plates-olio ja kytketään se sovelluksen sivupohjiin.
-  $templates = new League\Plates\Engine(TEMPLATE_DIR);
-
+  $templates = new League\Plates\Engine('../src/view'); 
   
   // Selvitetään mitä sivua on kutsuttu ja suoritetaan sivua vastaava
   // käsittelijä.

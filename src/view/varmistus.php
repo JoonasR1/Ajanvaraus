@@ -1,3 +1,3 @@
-<?php $this->layout('template', ['title' => 'Ajan varmistus']) ?>
+<?php $this->layout('template', ['title' => 'Varmistus']) ?>
 
-<h1>Lääkärin ajan varmistus</h1>
+<h1>Ajan varmistus</h1>
