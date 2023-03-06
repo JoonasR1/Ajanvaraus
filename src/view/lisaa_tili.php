@@ -9,7 +9,7 @@
   </div>
   <div>
     <label for="nimi">Sukunimi:</label>
-    <input id="snimi" type="text" name="snimi">
+    <input id="sukunimi" type="text" name="sukunimi">
   </div>
   <div>
     <label for="email">Sähköposti:</label>
