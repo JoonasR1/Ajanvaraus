@@ -14,24 +14,32 @@
   
   // Selvitetään mitä sivua on kutsuttu ja suoritetaan sivua vastaava
   // käsittelijä.
-  if ($request === '/' || $request === '/ajanvaraus') {
-    require_once MODEL_DIR . 'ajanvaraus.php';
-    $ajanvaraus = haeAjanvaraus();
-    echo $templates->render('ajanvaraus',['ajanvaraus' => $ajanvaraus]);
-  } else if ($request === '/varaa') {
-    require_once MODEL_DIR . 'ajanvaraus.php';
-    $varaa = haeVaraus($_GET['id']);
-    if ($varaa) {
-      echo $templates->render('varaa',['varaa' => $varaa]);
-    } else {
-      echo $templates->render('varausnotfound');
-    }
-  }   // ... ehtolauseen alku säilyy sellaisenaan
- else if ($request === '/lisaa_tili') {
-  echo $templates->render('lisaa_tili');
-} else { // ... loput ehtolauseesta säilyy sellaisenaan
-
-    echo $templates->render('notfound');
+  switch ($request) {
+    case '/':
+    case '/ajanvaraus':
+      require_once MODEL_DIR . 'model.php';
+      $ajanvaraus = haeAjanvaraus();
+      echo $templates->render('ajanvaraus',['ajanvaraus' => $ajanvaraus]);
+      break;
+    
+    case '/varaa':
+      require_once MODEL_DIR . 'model.php';
+      $varaa = haeVaraus($_GET['id']);
+      if ($varaa) {
+        echo $templates->render('varaa',['varaa' => $varaa]);
+      } else {
+        echo $templates->render('varausnotfound');
+      }
+      break;
+  
+    case '/lisaa_tili':
+      echo $templates->render('lisaa_tili');
+      break;
+  
+    default:
+      echo $templates->render('notfound');
+      break;
   }
+  
 
 ?> 
