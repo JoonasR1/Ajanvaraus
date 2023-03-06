@@ -2,7 +2,7 @@
 
 <h1>Meidän asiantuntijat</h1>
 
-<div class='tapahtumat'>
+<div class='ajanvaraus'>
 <?php
 
 foreach ($ajanvaraus as $ajanvaraus) {
