@@ -26,7 +26,11 @@
     } else {
       echo $templates->render('varausnotfound');
     }
-  } else {
+  }   // ... ehtolauseen alku säilyy sellaisenaan
+ else if ($request === '/lisaa_tili') {
+  echo $templates->render('lisaa_tili');
+} else { // ... loput ehtolauseesta säilyy sellaisenaan
+
     echo $templates->render('notfound');
   }
 
