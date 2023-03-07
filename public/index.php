@@ -31,15 +31,23 @@
       echo $templates->render('ajanvaraus',['ajanvaraus' => $ajanvaraus]);
       break;
     
-    case '/varaa':
-      require_once MODEL_DIR . 'model.php';
-      $varaa = haeVaraus($_GET['id']);
-      if ($varaa) {
-        echo $templates->render('varaa',['varaa' => $varaa]);
-      } else {
-        echo $templates->render('varausnotfound');
-      }
-      break;
+      case '/varaa':
+        require_once MODEL_DIR . 'model.php';
+        require_once MODEL_DIR . 'ilmoittautuminen.php';
+        $varaa = haeVaraus($_GET['id']);
+        if ($varaa) {
+          if ($loggeduser) {
+            $ilmoittautuminen = haeIlmoittautuminen($loggeduser['idhenkilo'],$tapahtuma['iddoc']);
+          } else {
+            $ilmoittautuminen = NULL;
+          }
+          echo $templates->render('varaa',['varaa' => $varaa,
+                                               'ilmoittautuminen' => $ilmoittautuminen,
+                                               'loggeduser' => $loggeduser]);
+        } else {
+          echo $templates->render('varausnotfound');
+        }
+        break;
   
       case '/lisaa_tili':
         if (isset($_POST['laheta'])) {
