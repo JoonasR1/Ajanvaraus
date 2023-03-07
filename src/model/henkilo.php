@@ -7,5 +7,8 @@
     return DB::lastInsertId();
   }
 
+  function haeHenkiloSahkopostilla($email) {
+    return DB::run('SELECT * FROM appointmentuser WHERE email = ?;', [$email])->fetchAll();
+  }
 
 ?>
