@@ -25,12 +25,11 @@ function lisaaTili($formdata) {
     }
   }
 
-  // Tarkistetaan, että discord-tunnus on määritelty ja se on
-  // muodossa tunnus#0000.
+// Tarkistetaan onko nimi määritelty ja se täyttää mallin.
   if (!isset($formdata['sukunimi']) || !$formdata['sukunimi']) {
-    $error['sukunimi'] = "Syötä sukunimesi ilman erikoismerkkejä.";
+    $error['sukunimi'] = "Anna sukunimesi.";
   } else {
-    if (!preg_match("/^.+#\d{4}$/",$formdata['sukunimi'])) {
+    if (!preg_match("/^[- '\p{L}]+$/u", $formdata["sukunimi"])) {
       $error['sukunimi'] = "Syötä sukunimesi ilman erikoismerkkejä.";
     }
   }
@@ -51,7 +50,6 @@ function lisaaTili($formdata) {
     }
   }
 
-
   // Tarkistetaan, että kummatkin salasanat on annettu ja että
   // ne ovat keskenään samat.
   if (isset($formdata['salasana1']) && $formdata['salasana1'] &&
@@ -70,7 +68,7 @@ function lisaaTili($formdata) {
 
     // Haetaan lomakkeen tiedot omiin muuttujiinsa.
     // Salataan salasana myös samalla.
-    $nimi = $formdata['nimi'];
+    $etunimi = $formdata['etunimi'];
     $sukunimi = $formdata['sukunimi'];
     $email = $formdata['email'];
     $salasana = password_hash($formdata['salasana1'], PASSWORD_DEFAULT);
