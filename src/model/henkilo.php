@@ -10,5 +10,8 @@
   function haeHenkiloSahkopostilla($email) {
     return DB::run('SELECT * FROM appointmentuser WHERE email = ?;', [$email])->fetchAll();
   }
+  function haeHenkilo($email) {
+    return DB::run('SELECT * FROM appointmentuser WHERE email = ?;', [$email])->fetch();
+  }
 
 ?>
