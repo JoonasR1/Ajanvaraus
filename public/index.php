@@ -34,9 +34,10 @@
   
       case '/lisaa_tili':
         if (isset($_POST['laheta'])) {
+          $formdata = cleanArrayData($_POST);
           require_once MODEL_DIR . 'henkilo.php';
-          $salasana = password_hash($_POST['salasana1'], PASSWORD_DEFAULT);
-          $id = lisaaHenkilo($_POST['nimi'],$_POST['sukunimi'],$_POST['email'],$salasana);
+          $salasana = password_hash($formdata['salasana1'], PASSWORD_DEFAULT);
+          $id = lisaaHenkilo($formdata['nimi'],$formdata['sukunimi'],$formdata['email'],$salasana);
           echo "Tili on luotu tunnisteella $id";
           break;
         } else {
