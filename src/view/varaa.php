@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => $varaa['nimi']]) ?>
+<?php $this->layout('template', ['title' => $varaa['name']]) ?>
 
 
 <h1><?=$varaa['name']?></h1>

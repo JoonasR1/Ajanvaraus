@@ -4,7 +4,7 @@ function lisaaTili($formdata) {
 
   // Tuodaan henkilo-mallin funktiot, joilla voidaan lisätä
   // henkilön tiedot tietokantaan.
-  require_once(MODEL_DIR . 'henkilo.php');
+  require_once(MODEL_DIR . 'appointmentuser.php');
 
   // Alustetaan virhetaulukko, joka palautetaan lopuksi joko
   // tyhjänä tai virheillä täytettynä.
@@ -18,24 +18,22 @@ function lisaaTili($formdata) {
 
   // Tarkistetaan onko nimi määritelty ja se täyttää mallin.
   if (!isset($formdata['etunimi']) || !$formdata['etunimi']) {
-    $error['etunimi'] = "Anna etunimesi.";
+    $error['nimi'] = "Anna nimesi.";
   } else {
-    if (!preg_match("/^[- '\p{L}]+$/u", $formdata["etunimi"])) {
-      $error['etunimi'] = "Syötä etunimesi ilman erikoismerkkejä.";
+    if (!preg_match("/^[- '\p{L}]+$/u", $formdata['etunimi'])) {
+      $error['etunimi'] = "Syötä nimesi ilman erikoismerkkejä.";
     }
   }
 
-// Tarkistetaan onko nimi määritelty ja se täyttää mallin.
+  // Tarkistetaan onko nimi määritelty ja se täyttää mallin.
   if (!isset($formdata['sukunimi']) || !$formdata['sukunimi']) {
-    $error['sukunimi'] = "Anna sukunimesi.";
+    $error['sukunimi'] = "Anna nimesi.";
   } else {
-    if (!preg_match("/^[- '\p{L}]+$/u", $formdata["sukunimi"])) {
-      $error['sukunimi'] = "Syötä sukunimesi ilman erikoismerkkejä.";
+    if (!preg_match("/^[- '\p{L}]+$/u", $formdata['sukunimi'])) {
+      $error['sukunimi'] = "Syötä nimesi ilman erikoismerkkejä.";
     }
   }
 
-  // Tarkistetaan, että sähköpostiosoite on määritelty ja se on
-  // oikeassa muodossa.
   // Tarkistetaan, että sähköpostiosoite on määritelty ja se on
   // oikeassa muodossa.
   if (!isset($formdata['email']) || !$formdata['email']) {
@@ -68,14 +66,14 @@ function lisaaTili($formdata) {
 
     // Haetaan lomakkeen tiedot omiin muuttujiinsa.
     // Salataan salasana myös samalla.
-    $etunimi = $formdata['etunimi'];
+    $nimi = $formdata['etunimi'];
     $sukunimi = $formdata['sukunimi'];
     $email = $formdata['email'];
     $salasana = password_hash($formdata['salasana1'], PASSWORD_DEFAULT);
 
     // Lisätään henkilö tietokantaan. Jos lisäys onnistui,
     // tulee palautusarvona lisätyn henkilön id-tunniste.
-    $idhenkilo = lisaaHenkilo($etunimi,$sukunimi,$email,$salasana);
+    $idhenkilo = lisaaHenkilo($nimi,$sukunimi,$email,$salasana);
 
     // Palautetaan JSON-tyyppinen taulukko, jossa:
     //  status   = Koodi, joka kertoo lisäyksen onnistumisen.

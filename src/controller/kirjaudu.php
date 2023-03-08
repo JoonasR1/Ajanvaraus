@@ -3,7 +3,7 @@
 function tarkistaKirjautuminen($email="", $salasana="") {
 
     // Haetaan käyttäjän tiedot sen sähköpostiosoitteella.
-    require_once(MODEL_DIR . 'henkilo.php');
+    require_once(MODEL_DIR . 'appointmentuser.php');
     $tiedot = haeHenkilo($email);
     // Tarkistetaan ensin löytyikö käyttäjä. Jos löytyi, niin
     // tarkistetaan täsmäävätkö salasanat.

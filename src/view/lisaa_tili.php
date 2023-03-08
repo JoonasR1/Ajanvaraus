@@ -10,12 +10,12 @@
   </div>
   <div>
     <label for="sukunimi">Sukunimi:</label>
-    <input type="text" name="sukunimi" value="<?= getValue($formdata,'sukunimi') ?>">
+    <input id="sukunimi" type="text" name="sukunimi" value="<?= getValue($formdata,'sukunimi') ?>">
     <div class="error"><?= getValue($error,'sukunimi'); ?></div>
   </div>
   <div>
-    <label>Sähköposti:</label>
-    <input type="text" name="email" value="<?= getValue($formdata,'email') ?>">
+    <label for="email">Sähköposti:</label>
+    <input id="email" type="email" name="email" value="<?= getValue($formdata,'email') ?>">
     <div class="error"><?= getValue($error,'email'); ?></div>
   </div>
   <div>

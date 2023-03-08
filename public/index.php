@@ -6,7 +6,7 @@
   require_once '../src/init.php';
   // Haetaan kirjautuneen käyttäjän tiedot.
   if (isset($_SESSION['user'])) {
-    require_once MODEL_DIR . 'henkilo.php';
+    require_once MODEL_DIR . 'appointmentuser.php';
     $loggeduser = haeHenkilo($_SESSION['user']);
   } else {
     $loggeduser = NULL;
@@ -26,18 +26,17 @@
   switch ($request) {
     case '/':
     case '/ajanvaraus':
-      require_once MODEL_DIR . 'model.php';
+      require_once MODEL_DIR . 'doctors.php';
       $ajanvaraus = haeAjanvaraus();
       echo $templates->render('ajanvaraus',['ajanvaraus' => $ajanvaraus]);
       break;
-    
-      case '/varaa':
-        require_once MODEL_DIR . 'model.php';
+     case '/varaa':
+        require_once MODEL_DIR . 'doctors.php';
         require_once MODEL_DIR . 'ilmoittautuminen.php';
         $varaa = haeVaraus($_GET['id']);
         if ($varaa) {
           if ($loggeduser) {
-            $ilmoittautuminen = haeIlmoittautuminen($loggeduser['idhenkilo'],$tapahtuma['iddoc']);
+            $ilmoittautuminen = haeIlmoittautuminen($loggeduser['idhenkilo'],$varaa['doc_id']);
           } else {
             $ilmoittautuminen = NULL;
           }
@@ -68,6 +67,7 @@
             if (isset($_POST['laheta'])) {
               require_once CONTROLLER_DIR . 'kirjaudu.php';
               if (tarkistaKirjautuminen($_POST['email'],$_POST['salasana'])) {
+                session_regenerate_id();
                 $_SESSION['user'] = $_POST['email'];
                 header("Location: " . $config['urls']['baseUrl']);
               } else {

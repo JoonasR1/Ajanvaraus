@@ -9,12 +9,13 @@ function cleanArrayData($array=[]) {
   }
   return $result;
 }
+
 function getValue($values, $key) {
-    if (array_key_exists($key, $values)) {
-      return htmlspecialchars($values[$key]);
-    } else {
-      return null;
-    }
+  if (array_key_exists($key, $values)) {
+    return htmlspecialchars($values[$key]);
+  } else {
+    return null;
   }
-  
+}
+
 ?>
