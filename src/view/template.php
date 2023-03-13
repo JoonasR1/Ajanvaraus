@@ -7,10 +7,14 @@
   </head>
   <body>
   <header>
-      <h1><a href="<?=BASEURL?>">Doc Booker</a></h1>
+      <h1>Doc Booker</h1>
+      <div class ="nav"><a href="<?=BASEURL."/etusivu"?>">Etusivu</a></div>
+      <div class ="nav"><a href="<?=BASEURL."/ajanvaraus"?>">Varaa lääkärinaika</a></div>
+      <div class ="nav"><a href="<?=BASEURL."/about"?>">Yhteystiedot</a></div>
       <div class="profile">
         <?php
           if (isset($_SESSION['user'])) {
+            echo "<div>Käyttäjä</div>";
             echo "<div>$_SESSION[user]</div>";
             echo "<div><a href='logout'>Kirjaudu ulos</a></div>";
           } else {
