@@ -93,11 +93,12 @@
                   require_once MODEL_DIR . 'ilmoittautuminen.php';
                   $varaa = $_GET['id'];
                   if ($loggeduser) {
-                    lisaaIlmoittautuminen($loggeduser['idhenkilo'],$varaa);
-                  }
-                  header("Location: tapahtuma?id=$varaa");
+                    $date = date('Y-m-d H:i:s');
+                    lisaaIlmoittautuminen($loggeduser['idhenkilo'], $varaa, $date);
+                 }                 
+                  header("Location: varaa?id=$varaa");
                 } else {
-                  header("Location: tapahtumat");
+                  header("Location: varaa");
                 }
                 break;
                 case '/peru':
@@ -107,9 +108,9 @@
                     if ($loggeduser) {
                       poistaIlmoittautuminen($loggeduser['idhenkilo'],$varaa);
                     }
-                    header("Location: tapahtuma?id=$varaa");
+                    header("Location: varaa?id=$varaa");
                   } else {
-                    header("Location: tapahtumat");  
+                    header("Location: varaa");  
                   }
                   break;
             
