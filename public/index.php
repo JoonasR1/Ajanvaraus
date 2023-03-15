@@ -166,9 +166,54 @@
 }
 break;
                 
-              
-          default:
-            echo $templates->render('notfound');
+case "/reset":
+  // Otetaan vaihtoavain talteen.
+  $resetkey = $_GET['key'];
+
+  // Seuraavat tarkistukset tarkistavat, että onko vaihtoavain
+  // olemassa ja se on vielä aktiivinen. Jos ei, niin tulostetaan
+  // käyttäjälle virheilmoitus ja poistutaan.
+  require_once MODEL_DIR . 'appointmentuser.php';
+  $rivi = tarkistaVaihtoavain($resetkey);
+  if ($rivi) {
+    // Vaihtoavain löytyi, tarkistetaan onko se vanhentunut.
+    if ($rivi['aikaikkuna'] < 0) {
+      echo $templates->render('reset_virhe');
+      break;
+    }
+  } else {
+    echo $templates->render('reset_virhe');
+    break;
+  }
+
+  // Vaihtoavain on voimassa, tarkistetaan onko lomakkeen kautta
+  // syötetty tietoa.
+  $formdata = cleanArrayData($_POST);
+  if (isset($formdata['laheta'])) {
+
+    // Lomakkeelle on syötetty uudet salasanat, annetaan syötteen
+        // käsittely kontrollerille.
+        require_once CONTROLLER_DIR . 'tili.php';
+        $tulos = resetoiSalasana($formdata,$resetkey);
+        // Tarkistetaan kontrollerin tekemän salasanaresetoinnin lopputulos.
+        if ($tulos['status'] == "200") {
+          // Salasana vaihdettu, tulostetaan ilmoitus.
+          echo $templates->render('reset_valmis');
+          break;
         }
+        // Salasanan vaihto ei onnistunut, tulostetaan lomake virhetekstin kanssa.
+        echo $templates->render('reset_lomake', ['error' => $tulos['error']]);
+        break;
+
+      } else {
+        // Lomakkeen tietoja ei ole vielä täytetty, tulostetaan lomake.
+        echo $templates->render('reset_lomake', ['error' => '']);
+        break;
+      }
+
+      break;
+default:
+     echo $templates->render('notfound');
+              }
     
 ?> 
