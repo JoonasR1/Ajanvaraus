@@ -44,10 +44,15 @@
     margin: .5rem;
   }
   footer {
-    font-size: 0.8rem;
+    height: 507px;
     text-align: center;
     color: black;
+    background-image: url("../images/docbooker.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
+  
   .ajanvaraus > div {
     display: flex;
     justify-content: space-between;
@@ -102,9 +107,7 @@
   .info a {
     color: black;
   }
-  .btn:hover{
-    color: white;
-  }
+
   header {
     background-color: olive;
     padding: 1rem 1.5rem;
@@ -115,3 +118,8 @@
     font-size: 0.8rem;
   }
   
+
+
+  .nav:hover a {
+    color: white;
+  }

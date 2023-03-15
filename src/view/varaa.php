@@ -10,7 +10,7 @@
 
 
 <form action="ilmoittautuminen.php" method="post">
-<input type="datetime-local" id="datetime-picker"  name="datetime-picker" min="<?php echo date('Y-m-d\TH:i'); ?>">
+<input type="datetime-local" id="datetime-picker" name="datetime-picker" min="<?php echo date('Y-m-d\TH:i'); ?>" step="1800">
 
 <?php
   if ($loggeduser) {
